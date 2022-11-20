@@ -7,6 +7,7 @@ import re
 class FrameApp(Frame):
     def __init__(self, master):
         super(FrameApp, self).__init__(master)
+
         self.alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
         self.app_running = True
         self.current_grid_cell = 0
@@ -28,6 +29,7 @@ class FrameApp(Frame):
         self.green = "limegreen"
         self.border_width = 4
         self.main_box = None
+        self.keyboard_box = None
 
         self.initialize_gui()
         self.initialize_past_words()
@@ -309,7 +311,7 @@ class FrameApp(Frame):
         w = choice(words)
 
         self.word_of_the_day = w
-        self.lab_entry.config(text=f'Enter word here - {w}')
+        self.lab_entry.config(text=f'Enter your guess here.')
         self.word.delete(0, 10)
         self.word.focus()
 
@@ -439,7 +441,7 @@ class FrameApp(Frame):
 
         self.word = Entry(self.main_box, font=("Ariel", 15), borderwidth=self.border_width, relief="sunken")
         self.word.grid(row=9, column=1, columnspan=5)
-        self.word.bind('<Return>', handler)
+        self.word.bind('<Return>', return_handler)
 
         self.b_reset = Button(self.main_box, text="Reset", command=self.set_game, bg='Lavender', width=4)
         self.b_reset.grid(sticky='e', row=11, column=2, columnspan=2)
@@ -454,61 +456,80 @@ class FrameApp(Frame):
         # Keyboard Row 1
         self.Q_KEY = Button(self.keyboard_box, text="Q", fg="white", bg=self.grey, relief="raised")
         self.Q_KEY.grid(row=100, column=0, padx=2, pady=2, sticky="e")
+        self.Q_KEY.bind('<Button>', key_handler)
 
         self.W_KEY = Button(self.keyboard_box, text="W", fg="white", bg=self.grey, relief="raised")
         self.W_KEY.grid(row=100, column=1, padx=2, pady=2)
+        self.W_KEY.bind('<Button>', key_handler)
 
         self.E_KEY = Button(self.keyboard_box, text="E", fg="white", bg=self.grey, relief="raised")
         self.E_KEY.grid(row=100, column=2, padx=2, pady=2)
+        self.E_KEY.bind('<Button>', key_handler)
 
         self.R_KEY = Button(self.keyboard_box, text="R", fg="white", bg=self.grey, relief="raised")
         self.R_KEY.grid(row=100, column=3, padx=2, pady=2)
+        self.R_KEY.bind('<Button>', key_handler)
 
         self.T_KEY = Button(self.keyboard_box, text="T", fg="white", bg=self.grey, relief="raised")
         self.T_KEY.grid(row=100, column=4, padx=2, pady=2)
+        self.T_KEY.bind('<Button>', key_handler)
 
         self.Y_KEY = Button(self.keyboard_box, text="Y", fg="white", bg=self.grey, relief="raised")
         self.Y_KEY.grid(row=100, column=5, padx=2, pady=2)
+        self.Y_KEY.bind('<Button>', key_handler)
 
         self.U_KEY = Button(self.keyboard_box, text="U", fg="white", bg=self.grey, relief="raised")
         self.U_KEY.grid(row=100, column=6, padx=2, pady=2)
+        self.U_KEY.bind('<Button>', key_handler)
 
         self.I_KEY = Button(self.keyboard_box, text="I", fg="white", bg=self.grey, relief="raised")
         self.I_KEY.grid(row=100, column=7, padx=2, pady=2)
+        self.I_KEY.bind('<Button>', key_handler)
 
         self.O_KEY = Button(self.keyboard_box, text="O", fg="white", bg=self.grey, relief="raised")
         self.O_KEY.grid(row=100, column=8, padx=2, pady=2, sticky="w")
+        self.O_KEY.bind('<Button>', key_handler)
 
         self.P_KEY = Button(self.keyboard_box, text="P", fg="white", bg=self.grey, relief="raised")
         self.P_KEY.grid(row=100, column=9, padx=2, pady=2, sticky="w")
+        self.P_KEY.bind('<Button>', key_handler)
 
         # Keyboard Row 2
         self.A_KEY = Button(self.keyboard_box, text="A", fg="white", bg=self.grey, relief="raised")
         self.A_KEY.grid(row=101, column=0, padx=2, pady=2, sticky="e")
+        self.A_KEY.bind('<Button>', key_handler)
 
         self.S_KEY = Button(self.keyboard_box, text="S", fg="white", bg=self.grey, relief="raised")
         self.S_KEY.grid(row=101, column=1, padx=2, pady=2)
+        self.S_KEY.bind('<Button>', key_handler)
 
         self.D_KEY = Button(self.keyboard_box, text="D", fg="white", bg=self.grey, relief="raised")
         self.D_KEY.grid(row=101, column=2, padx=2, pady=2)
+        self.D_KEY.bind('<Button>', key_handler)
 
         self.F_KEY = Button(self.keyboard_box, text="F", fg="white", bg=self.grey, relief="raised")
         self.F_KEY.grid(row=101, column=3, padx=2, pady=2)
+        self.F_KEY.bind('<Button>', key_handler)
 
         self.G_KEY = Button(self.keyboard_box, text="G", fg="white", bg=self.grey, relief="raised")
         self.G_KEY.grid(row=101, column=4, padx=2, pady=2)
+        self.G_KEY.bind('<Button>', key_handler)
 
         self.H_KEY = Button(self.keyboard_box, text="H", fg="white", bg=self.grey, relief="raised")
         self.H_KEY.grid(row=101, column=5, padx=2, pady=2)
+        self.H_KEY.bind('<Button>', key_handler)
 
         self.J_KEY = Button(self.keyboard_box, text="J", fg="white", bg=self.grey, relief="raised")
         self.J_KEY.grid(row=101, column=6, padx=2, pady=2)
+        self.J_KEY.bind('<Button>', key_handler)
 
         self.K_KEY = Button(self.keyboard_box, text="K", fg="white", bg=self.grey, relief="raised")
         self.K_KEY.grid(row=101, column=7, padx=2, pady=2)
+        self.K_KEY.bind('<Button>', key_handler)
 
         self.L_KEY = Button(self.keyboard_box, text="L", fg="white", bg=self.grey, relief="raised")
         self.L_KEY.grid(row=101, column=8, padx=2, pady=2, sticky="w")
+        self.L_KEY.bind('<Button>', key_handler)
 
         # Keyboard Row 3
 
@@ -517,35 +538,62 @@ class FrameApp(Frame):
 
         self.Z_KEY = Button(self.keyboard_box, text="Z", fg="white", bg=self.grey, relief="raised")
         self.Z_KEY.grid(row=102, column=1, padx=2, pady=2)
+        self.Z_KEY.bind('<Button>', key_handler)
 
         self.X_KEY = Button(self.keyboard_box, text="X", fg="white", bg=self.grey, relief="raised")
         self.X_KEY.grid(row=102, column=2, padx=2, pady=2)
+        self.X_KEY.bind('<Button>', key_handler)
 
         self.C_KEY = Button(self.keyboard_box, text="C", fg="white", bg=self.grey, relief="raised")
         self.C_KEY.grid(row=102, column=3, padx=2, pady=2)
+        self.C_KEY.bind('<Button>', key_handler)
 
         self.V_KEY = Button(self.keyboard_box, text="V", fg="white", bg=self.grey, relief="raised")
         self.V_KEY.grid(row=102, column=4, padx=2, pady=2)
+        self.V_KEY.bind('<Button>', key_handler)
 
         self.B_KEY = Button(self.keyboard_box, text="B", fg="white", bg=self.grey, relief="raised")
         self.B_KEY.grid(row=102, column=5, padx=2, pady=2)
+        self.B_KEY.bind('<Button>', key_handler)
 
         self.N_KEY = Button(self.keyboard_box, text="N", fg="white", bg=self.grey, relief="raised")
         self.N_KEY.grid(row=102, column=6, padx=2, pady=2)
+        self.N_KEY.bind('<Button>', key_handler)
 
         self.M_KEY = Button(self.keyboard_box, text="M", fg="white", bg=self.grey, relief="raised")
         self.M_KEY.grid(row=102, column=7, padx=2, pady=2)
+        self.M_KEY.bind('<Button>', key_handler)
 
         self.BACK_KEY = Button(self.keyboard_box, text="BACK", fg="white", bg=self.grey, relief="raised")
         self.BACK_KEY.grid(row=102, column=8, padx=2, pady=2, columnspan=2)
+        self.BACK_KEY.bind('<Button>', key_handler)
 
 
-def handler(e):
+def key_handler(e):
     """
-    Handle enter key, submit enter
+    Handle keyboard, update word entry widget
     :param e:
     :return:
     """
+    try:
+        alpha = e.widget.cget("text").lower()
+        index = app.word.index(INSERT)
+        if "back" != alpha:
+            app.word.insert(index, alpha)
+        else:
+            app.word.delete(index-1, index)
+    except IndexError:
+        print('Well shit.')
+
+
+def return_handler(e):
+    """
+    Handle return key, submit entry
+    :param e:
+    :return:
+    """
+    # alpha = e.keysym
+    # print(f'handler {e} :{alpha}')
     app.check_my_guess()
 
 
